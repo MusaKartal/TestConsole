@@ -58,6 +58,23 @@ namespace TestConsole
             return text;         
         }
 
+        public async void Basic() {
+            var mainText = await TextRead();
+            var mainTextLength = mainText.Length;
+            var mainTextMod = mainTextLength % 64;
+            if (mainTextMod * 64 < mainTextLength) mainTextMod++;
+
+            List<string> textToBeWritten = new List<string>();
+            List<int> nımbers = new List<int>();
+
+            for (int i = 0; i < mainTextMod; i++) {
+                if(i*64 >mainTextLength) textToBeWritten.Add(mainText.Substring(i * 64, mainTextLength - i * 64));
+                else textToBeWritten.Add(mainText.Substring(i * 64, 64));
+
+            }
+        }
+
+
         public async void TextWriter(string path)
         {
             var spliteValue = await Split();
