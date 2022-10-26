@@ -10,20 +10,38 @@ namespace TestConsole
 {
     public class Text
     {
-        async Task <IEnumerable<string>> Split()
+        async Task<IEnumerable<string>> Split()
+        //async Task<string> Split()
         {
             var textRead = await TextRead();
-            var patates = textRead.Length % 64;
-           
-            var getLastValue = GetLast(textRead, patates);
-            Console.WriteLine(patates);
+
+            //List <string> lines = new List<string>().ToList();
+            //var textLength = textRead.Length;
+            //var textMod = textLength % 64;
+            //var textSection = textLength / 64;
+
+            //if (textMod * 64 < textLength)
+            //{
+            //    textSection++;
+
+            //}
+
+            //for (int i = 0; i < textSection; i++)
+            //{
+            //    var textSubstring = textRead.Substring(i * 64, 64);
+            //    //Burada patlatıyor
+            //    lines.Add(textSubstring);
+            //}
+
+            var textLength = textRead.Length % 64;
+            var getLastValue = GetLast(textRead, textLength);
             
             var textValue = Enumerable.Range(0, textRead.Length / 64)
                 .Select(i => textRead.Substring(i * 64, 64));
             List<string> strings = textValue.ToList();
             strings.Add(getLastValue);
-            
-            textValue.Concat(new[] {getLastValue});
+
+            textValue.Concat(new[] { getLastValue });
             Console.WriteLine(textRead.Length / 64);
             return strings;
         }
@@ -60,9 +78,8 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-           
+
             Text text = new Text();
-            
             text.TextWriter("C:\\Users\\Musa\\Documents\\Musa Vs-Projects\\TestConsole\\TestConsole\\TextWrite.txt");
 
         }
